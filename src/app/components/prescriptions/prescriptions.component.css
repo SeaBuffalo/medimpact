@@ -1,0 +1,23 @@
+.prescription-search {
+  margin: 20px;
+  height: 71px;
+}
+
+h2 {
+  font-weight: 400;
+}
+
+input[type="text"] {
+  width: 90%;
+  margin-top: 5px;
+  outline: none;
+}
+
+.prescription-container {
+  margin-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  height: calc(80% - 71px);
+  min-height: 12rem;
+  overflow-y: scroll;
+}

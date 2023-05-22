@@ -1,0 +1,14 @@
+.result {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 90%;
+  max-width: 1000px;
+  min-height: 200px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 2rem;
+}

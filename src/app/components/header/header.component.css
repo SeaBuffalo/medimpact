@@ -1,0 +1,19 @@
+button:focus {
+  outline: #f4f4f4 solid 2px;
+}
+
+.header-btn {
+  padding: .5rem; 
+  border-radius: 1px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-text {
+  font-weight: 300;
+}
