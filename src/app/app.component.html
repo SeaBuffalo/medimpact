@@ -1,9 +1,5 @@
 <app-header></app-header>
-<main>
-  <section class="prescriptions">
-    <app-prescriptions></app-prescriptions>
-  </section>
-  <section class="search">
-    <app-search></app-search>
-  </section>
+<main (window:resize)="handleResize($event)" >
+  <app-prescriptions></app-prescriptions>
+  <app-search></app-search>
 </main>

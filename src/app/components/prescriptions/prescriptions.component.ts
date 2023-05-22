@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ToggleMenuService } from '../../services/toggle-menu.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-prescriptions',
@@ -6,9 +8,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./prescriptions.component.css'],
 })
 export class PrescriptionsComponent {
+  showMenu: boolean = window.innerWidth < 768 ? false : true;
+  subscription!: Subscription;
+
   showPrescriptionBar = false;
 
-  togglePrescriptionBar() {
-    this.showPrescriptionBar = !this.showPrescriptionBar;
+  constructor(private toggleMenuService: ToggleMenuService) {
+    this.subscription = this.toggleMenuService
+      .onToggleMenu()
+      .subscribe((value) => (this.handleToggleMenu(value)));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  handleToggleMenu(value: boolean): void {
+    this.showMenu = value;
   }
 }

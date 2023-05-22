@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToggleMenuService } from '../../services/toggle-menu.service';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,4 +9,11 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent {
   faBars = faBars;
+  showMenu: boolean = true;
+
+  constructor(private toggleMenuService: ToggleMenuService) {}
+
+  toggleShowMenu(): void {
+    this.toggleMenuService.toggleMenu();
+  }
 }
