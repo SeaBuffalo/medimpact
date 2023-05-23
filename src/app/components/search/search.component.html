@@ -1,6 +1,6 @@
 <section
-  (click)="handleClick()"
-  (touchstart)="handleClick()"
+  (click)="handleFocus()"
+  (touchstart)="handleFocus()"
   class="{{ sectionClass }}"
 >
   <div
@@ -16,17 +16,9 @@
     />
   </div>
   <div class="results-container">
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
-    <app-search-result></app-search-result>
+    <app-search-result
+      *ngFor="let result of searchResults"
+      [result]="result"
+    ></app-search-result>
   </div>
 </section>

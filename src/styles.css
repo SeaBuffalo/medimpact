@@ -8,6 +8,7 @@
 
 html {
   font-family: "Inter", sans-serif;
+  background-color: #f4f4f4;
 }
 
 main {
@@ -75,9 +76,11 @@ input[type="text"]:focus {
   z-index: 40;
 }
 
-.search, .search-nomenu {
+.search,
+.search-nomenu {
   z-index: 30;
   background-color: #f4f4f4;
+  min-height: calc(100vh - 60px);
 }
 
 .search {

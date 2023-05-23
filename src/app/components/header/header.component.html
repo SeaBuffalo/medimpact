@@ -1,11 +1,16 @@
 <header>
   <div class="header-container">
-    <button (click)="toggleShowMenu()" class="header-btn">
+    <button
+      (click)="toggleShowMenu()"
+      class="header-btn"
+      aria-label="prescription menu"
+    >
       <fa-icon size="lg" [icon]="faBars"></fa-icon>
     </button>
     <img
       draggable="false"
       src="../../../assets/images/logo.svg"
+      alt="MedImpact Logo"
       height="40px"
     />
     <h4 class="header-text">Medication Search</h4>

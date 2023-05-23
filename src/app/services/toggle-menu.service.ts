@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ToggleMenuService {
-  showMenu: boolean = window.innerWidth < 768 ? false : true;
+  public showMenu: boolean = window.innerWidth < 768 ? false : true;
   private toggleSubject = new Subject<any>();
 
   constructor() { }

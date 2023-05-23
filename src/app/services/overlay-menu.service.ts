@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class OverlayMenuService {
-  overlayMenu: boolean = window.innerWidth < 768 ? true : false;
+  public overlayMenu: boolean = window.innerWidth < 768 ? true : false;
   private overlaySubject = new Subject<any>();
 
   constructor(private toggleMenuService: ToggleMenuService) {}
