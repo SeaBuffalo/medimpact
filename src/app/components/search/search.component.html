@@ -1,11 +1,13 @@
 <section
   (click)="handleFocus()"
   (touchstart)="handleFocus()"
+  (window:scroll)="handleScroll()"
   class="{{ sectionClass }}"
 >
   <div
     [ngStyle]="{ width: headerWidthFull ? '100%' : 'calc(100% - 280px)' }"
     class="search-container"
+    id="search-container"
   >
     <h1>Find Your Medication</h1>
     <app-search-bar
@@ -13,11 +15,11 @@
       (focus)="handleFocus()"
     ></app-search-bar>
   </div>
-  <ul class="results-container">
-    <li class="error-message" *ngIf="errorMessage">{{errorMessage}}</li>
+  <section class="results-container">
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
     <app-search-result
       *ngFor="let result of searchResults"
       [result]="result"
     ></app-search-result>
-  </ul>
+  </section>
 </section>

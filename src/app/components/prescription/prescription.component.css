@@ -1,6 +1,60 @@
 .prescription {
   background-color: white;
-  padding: 1rem;
-  height: 4rem;
-  border-bottom: 1px solid rgba(0,0,0,.3);
+  min-height: 4rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  word-wrap: break-word;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 6px rgba(0,0,0,.3);
+}
+
+.prescription-header {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: linear-gradient(to bottom, rgba(0,0,100,.05), rgba(0,0,100,.1));
+}
+
+.prescription-brand {
+  font-size: 1.5rem;
+}
+
+.remove-prescription {
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+}
+
+.remove-prescription:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.prescription-sponsor {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 200, 0.736);
+  color: white;
+}
+
+.prescription-status {
+  text-align: end;
+}
+
+table, tr {
+  width: 100%;
+  max-width: 100%;
+}
+
+table, th, tr, td {
+  border: none;
+  padding: 5px;
+  word-wrap: break-word;
+  text-align: start;
+}
+
+td {
+  max-width: 150px;
 }

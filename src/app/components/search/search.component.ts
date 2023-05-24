@@ -3,7 +3,7 @@ import { ToggleMenuService } from '../../services/toggle-menu.service';
 import { OverlayMenuService } from '../../services/overlay-menu.service';
 import { CallService } from '../../services/call.service';
 import { Subscription } from 'rxjs';
-import { SearchResult } from '../../types/searchResult';
+import { SearchResult } from '../../types/SearchResult';
 
 @Component({
   selector: 'app-search',
@@ -16,141 +16,109 @@ export class SearchComponent {
   private toggleMenuSubscription!: Subscription;
   private overlayMenuSubscription!: Subscription;
   private callServiceSubscription!: Subscription;
+  private prevScrollpos: number = window.pageYOffset;
   public errorMessage: string | null = null;
   public sectionClass: string =
     window.innerWidth < 768 ? 'search-nomenu' : 'search';
   public headerWidthFull: boolean = window.innerWidth < 768 ? true : false;
   @Input() searchResults: SearchResult[] = [
     {
-      sponsor_name: 'ORTHO MCNEIL PHARM',
-      brand_name: 'TYLENOL W/ CODEINE NO. 4',
-      dosage_form: 'CAPSULE',
-      route: 'ORAL',
-      active_ingredients: [
-        {
-          name: 'ACETAMINOPHEN',
-          strength: '300MG',
-        },
-        {
-          name: 'CODEINE PHOSPHATE',
-          strength: '60MG',
-        },
-      ],
-      marketing_status: 'Discontinued',
+        "sponsor_name": "BAYER",
+        "brand_name": "ALEVE-D SINUS & COLD",
+        "dosage_form": "TABLET, EXTENDED RELEASE",
+        "route": "ORAL",
+        "active_ingredients": [
+            {
+                "name": "NAPROXEN SODIUM",
+                "strength": "220MG"
+            },
+            {
+                "name": "PSEUDOEPHEDRINE HYDROCHLORIDE",
+                "strength": "120MG **Federal Register determination that product was not discontinued or withdrawn for safety or effectiveness reasons**"
+            }
+        ],
+        "marketing_status": "Discontinued",
+        "application_number": "NDA021076"
     },
     {
-      sponsor_name: 'ORTHO MCNEIL PHARM',
-      brand_name: 'TYLENOL W/ CODEINE NO. 3',
-      dosage_form: 'CAPSULE',
-      route: 'ORAL',
-      active_ingredients: [
-        {
-          name: 'ACETAMINOPHEN',
-          strength: '300MG',
-        },
-        {
-          name: 'CODEINE PHOSPHATE',
-          strength: '30MG',
-        },
-      ],
-      marketing_status: 'Discontinued',
+        "sponsor_name": "PERRIGO",
+        "brand_name": "NAPROXEN SODIUM AND PSEUDOEPHEDRINE HYDROCHLORIDE",
+        "dosage_form": "TABLET, EXTENDED RELEASE",
+        "route": "ORAL",
+        "active_ingredients": [
+            {
+                "name": "NAPROXEN SODIUM",
+                "strength": "220MG"
+            },
+            {
+                "name": "PSEUDOEPHEDRINE HYDROCHLORIDE",
+                "strength": "120MG"
+            }
+        ],
+        "marketing_status": "Over-the-counter",
+        "application_number": "ANDA076518"
     },
     {
-      sponsor_name: 'JANSSEN PHARMS',
-      brand_name: 'TYLENOL W/ CODEINE NO. 3',
-      dosage_form: 'TABLET',
-      route: 'ORAL',
-      active_ingredients: [
-        {
-          name: 'ACETAMINOPHEN',
-          strength: '300MG',
-        },
-        {
-          name: 'CODEINE PHOSPHATE',
-          strength: '30MG',
-        },
-      ],
-      marketing_status: 'Discontinued',
+        "sponsor_name": "BIONPHARMA INC",
+        "brand_name": "NAPROXEN SODIUM",
+        "dosage_form": "CAPSULE",
+        "route": "ORAL",
+        "active_ingredients": [
+            {
+                "name": "NAPROXEN SODIUM",
+                "strength": "EQ 200MG BASE"
+            }
+        ],
+        "marketing_status": "Over-the-counter",
+        "application_number": "NDA021920"
     },
     {
-      sponsor_name: 'ORTHO MCNEIL PHARM',
-      brand_name: 'TYLENOL W/ CODEINE',
-      dosage_form: 'TABLET',
-      route: 'ORAL',
-      active_ingredients: [
-        {
-          name: 'ACETAMINOPHEN',
-          strength: '325MG',
-        },
-        {
-          name: 'CODEINE PHOSPHATE',
-          strength:
-            '30MG **Federal Register determination that product was not discontinued or withdrawn for safety or effectiveness reasons**',
-        },
-      ],
-      marketing_status: 'Discontinued',
+        "sponsor_name": "BAYER",
+        "brand_name": "ALEVE",
+        "dosage_form": "TABLET",
+        "route": "ORAL",
+        "active_ingredients": [
+            {
+                "name": "NAPROXEN SODIUM",
+                "strength": "220MG"
+            }
+        ],
+        "marketing_status": "Over-the-counter",
+        "application_number": "NDA020204"
     },
     {
-      sponsor_name: 'ORTHO MCNEIL PHARM',
-      brand_name: 'TYLENOL W/ CODEINE',
-      dosage_form: 'SOLUTION',
-      route: 'ORAL',
-      active_ingredients: [
-        {
-          name: 'ACETAMINOPHEN',
-          strength: '120MG/5ML',
-        },
-        {
-          name: 'CODEINE PHOSPHATE',
-          strength: '12MG/5ML',
-        },
-      ],
-      marketing_status: 'Discontinued',
+        "sponsor_name": "BAYER HLTHCARE",
+        "brand_name": "ALEVE PM",
+        "dosage_form": "TABLET",
+        "route": "ORAL",
+        "active_ingredients": [
+            {
+                "name": "DIPHENHYDRAMINE HYDROCHLORIDE",
+                "strength": "25MG"
+            },
+            {
+                "name": "NAPROXEN SODIUM",
+                "strength": "220MG"
+            }
+        ],
+        "marketing_status": "Over-the-counter",
+        "application_number": "NDA205352"
     },
     {
-      sponsor_name: 'J AND J CONSUMER INC',
-      brand_name: 'TYLENOL',
-      dosage_form: 'SUPPOSITORY',
-      route: 'RECTAL',
-      active_ingredients: [
-        {
-          name: 'ACETAMINOPHEN',
-          strength: '650MG',
-        },
-      ],
-      marketing_status: 'Discontinued',
-    },
-    {
-      sponsor_name: 'J AND J CONSUMER INC',
-      brand_name: 'TYLENOL',
-      dosage_form: 'TABLET, EXTENDED RELEASE',
-      route: 'ORAL',
-      active_ingredients: [
-        {
-          name: 'ACETAMINOPHEN',
-          strength: '650MG',
-        },
-      ],
-      marketing_status: 'Over-the-counter',
-    },
-    {
-      sponsor_name: 'L PERRIGO CO',
-      brand_name: 'ACETAMINOPHEN AND IBUPROFEN',
-      dosage_form: 'TABLET',
-      route: 'ORAL',
-      active_ingredients: [
-        {
-          name: 'ACETAMINOPHEN',
-          strength: '250MG',
-        },
-        {
-          name: 'IBUPROFEN',
-          strength: '125MG',
-        },
-      ],
-      marketing_status: 'Over-the-counter',
-    },
-  ];
+        "sponsor_name": "PERRIGO PHARMA INTL",
+        "brand_name": "DICLOFENAC SODIUM",
+        "dosage_form": "GEL",
+        "route": "TOPICAL",
+        "active_ingredients": [
+            {
+                "name": "DICLOFENAC SODIUM",
+                "strength": "1%"
+            }
+        ],
+        "marketing_status": "Over-the-counter",
+        "application_number": "ANDA211253"
+    }
+];
 
   constructor(
     private toggleMenuService: ToggleMenuService,
@@ -212,5 +180,15 @@ export class SearchComponent {
 
   updateResults(results: any[]): void {
     this.searchResults = results;
+  }
+
+  handleScroll(): void {
+    const currentScrollPos = window.pageYOffset;
+    if (this.prevScrollpos > currentScrollPos) {
+      document.getElementById('search-container')!.style.marginTop = '0';
+    } else {
+      document.getElementById('search-container')!.style.marginTop = '-113px';
+    }
+    this.prevScrollpos = currentScrollPos;
   }
 }

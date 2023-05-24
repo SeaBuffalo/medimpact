@@ -6,6 +6,7 @@
   justify-content: center;
   position: fixed;
   background-color: #f4f4f4;
+  transition: 300ms;
 }
 
 h1 {

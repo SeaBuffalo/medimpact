@@ -7,4 +7,5 @@ export type SearchResult = {
   route: string;
   active_ingredients: Ingredient[];
   marketing_status: string;
+  application_number: string;
 };

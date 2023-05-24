@@ -1,25 +1,28 @@
-<section
-  *ngIf="showMenu"
-  class="prescriptions"
->
+<section *ngIf="showMenu" class="prescriptions">
   <div class="prescription-search">
     <h2>Your Prescriptions</h2>
-    <input type="text" placeholder="search" maxlength="35" />
+    <div class="input-container">
+      <input
+        [(ngModel)]="searchTerm"
+        id="prescriptions-filter"
+        type="text"
+        placeholder="search"
+        maxlength="35"
+        (keyup)="filterPrescriptions($event)"
+      />
+      <button
+        *ngIf="searchTerm.length"
+        (click)="clearFilter()"
+        class="clear-search"
+      >
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
+    </div>
   </div>
-  <div class="prescription-container">
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-    <app-prescription></app-prescription>
-  </div>
+  <section class="prescription-container">
+    <app-prescription
+      *ngFor="let prescription of shownPrescriptions"
+      [prescription]="prescription"
+    ></app-prescription>
+  </section>
 </section>

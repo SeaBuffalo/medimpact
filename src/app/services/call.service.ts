@@ -30,7 +30,7 @@ export class CallService {
   }
 
   public getDrugs(query: string): Observable<any> {
-    const sanitizedQuery = query.replace(' ', '+');
+    const sanitizedQuery = query.replaceAll(' ', '+').replaceAll('/', '+').replaceAll('&', '');
     const url = `${this.apiurl}search=${sanitizedQuery}&limit=10`;
     return this.http.get<any>(url);
   }

@@ -2,7 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CallService } from '../../services/call.service';
-import { SearchResult } from '../../types/searchResult';
+import { SearchResult } from '../../types/SearchResult';
 
 @Component({
   selector: 'app-search-bar',
@@ -38,6 +38,7 @@ export class SearchBarComponent {
             route: result.products[0].route,
             active_ingredients: result.products[0].active_ingredients,
             marketing_status: result.products[0].marketing_status,
+            application_number: result.application_number,
           };
           newResults.push(newResult);
         });
@@ -118,6 +119,7 @@ export class SearchBarComponent {
 
   handleSuggestionClick(suggestion: string): void {
     this.searchTerm = suggestion;
+    
     this.newSearch(this.searchTerm);
   }
 

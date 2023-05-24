@@ -1,3 +1,22 @@
-<div class="prescription">
-  <p>Ibuprofin</p>
-</div>
+<article class="prescription">
+  <div class="prescription-header">
+    <p class="prescription-brand">{{ prescription.brand_name }}</p>
+    <button class="remove-prescription" (click)="removePrescription()">
+      <fa-icon [icon]="faTimes"></fa-icon>
+    </button>
+  </div>
+  <div class="prescription-sponsor">
+    <p>{{ prescription.sponsor_name }}</p>
+    <p class="prescription-status">{{ prescription.marketing_status }}</p>
+  </div>
+  <table>
+    <tr>
+      <th>Active Ingredients</th>
+      <th>Dosage</th>
+    </tr>
+    <tr *ngFor="let ingredient of prescription.active_ingredients">
+      <td>{{ ingredient.name }}</td>
+      <td>{{ ingredient.strength }}</td>
+    </tr>
+  </table>
+</article>
