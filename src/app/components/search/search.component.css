@@ -8,23 +8,19 @@
   background-color: #f4f4f4;
 }
 
-h1, input[type="text"] {
-  width: 90%;
-  max-width: 550px;
-}
-
 h1 {
   font-weight: 400;
   font-size: 2rem;
   line-height: 1.8rem;
-}
-
-input[type="text"] {
-  min-height: 35px;
-  margin-top: 5px;
-  outline: none;
+  width: 90%;
+  max-width: 550px;
 }
 
 .results-container {
   padding-top: 111px;
+}
+
+.error-message {
+  text-align: center;
+  font-size: 2rem;
 }

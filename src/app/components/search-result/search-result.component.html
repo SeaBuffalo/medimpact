@@ -1,3 +1,26 @@
-<div class="result">
-  <h3>{{result}}</h3>
-</div>
+<li class="result">
+  <div class="result-header">
+    <h3>{{result.brand_name}}</h3>
+  </div>
+  <p class="result-sponsor">{{result.sponsor_name}}</p>
+  <table>
+    <tr>
+      <th>Active Ingredients</th>
+      <th>Dosage</th>
+    </tr>
+    <tr *ngFor="let ingredient of result.active_ingredients">
+      <td>{{ingredient.name}}</td>
+      <td>{{ingredient.strength}}</td>
+    </tr>
+  </table>
+  <table class="result-dosage">
+    <tr>
+      <th>Dosage Form:</th>
+      <td>{{result.dosage_form}}</td>
+    </tr>
+    <tr>
+      <th>Administration:</th>
+      <td>{{result.route}}</td>
+    </tr>
+  </table>
+</li>

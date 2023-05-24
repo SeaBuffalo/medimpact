@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -10,6 +11,8 @@ import { PrescriptionsComponent } from './components/prescriptions/prescriptions
 import { SearchComponent } from './components/search/search.component';
 import { PrescriptionComponent } from './components/prescription/prescription.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { SearchSuggestionsComponent } from './components/search-suggestions/search-suggestions.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import { SearchResultComponent } from './components/search-result/search-result.
     SearchComponent,
     PrescriptionComponent,
     SearchResultComponent,
+    SearchBarComponent,
+    SearchSuggestionsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

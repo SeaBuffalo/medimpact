@@ -1,0 +1,42 @@
+<div class="search-bar">
+  <input
+    [(ngModel)]="searchTerm"
+    (keyup)="debounceInput($event)"
+    (keydown.enter)="newSearch(searchTerm)"
+    (keydown.escape)="handleBlur()"
+    (keydown.arrowDown)="highlightFirstSuggestion($event)"
+    (focus)="handleFocus()"
+    (blur)="handleBlur()"
+    type="text"
+    placeholder="Enter a medication name, condition, brand name, etc."
+    maxlength="65"
+    id="search-bar-input"
+  />
+  <button
+    *ngIf="searchTerm.length"
+    (click)="clearSearchTerm()"
+    class="clear-search"
+    aria-label="Clear search query"
+  >
+    <fa-icon [icon]="faTimes"></fa-icon>
+  </button>
+  <button
+    (click)="newSearch(searchTerm)"
+    class="search-btn"
+    aria-label="Submit search query for medication"
+  >
+    <fa-icon [icon]="faSearch"></fa-icon>
+  </button>
+  <ul *ngIf="showSuggestions" id="suggestion-container">
+    <app-search-suggestions
+      *ngFor="let suggestion of suggestions"
+      [suggestion]="suggestion"
+      (click)="handleSuggestionClick(suggestion)"
+      (blur)="handleBlur()"
+      (keydown.arrowDown)="highlightSuggestionDown($event)"
+      (keydown.tab)="highlightSuggestionDown($event)"
+      (keydown.shift.tab)="highlightSuggestionUp($event)"
+      (keydown.arrowUp)="highlightSuggestionUp($event)"
+    ></app-search-suggestions>
+  </ul>
+</div>

@@ -8,17 +8,16 @@
     class="search-container"
   >
     <h1>Find Your Medication</h1>
-    <input
-      type="text"
-      placeholder="Enter a medication name, condition, brand name, etc."
+    <app-search-bar
+      (searchResults)="updateResults($event)"
       (focus)="handleFocus()"
-      maxlength="65"
-    />
+    ></app-search-bar>
   </div>
-  <div class="results-container">
+  <ul class="results-container">
+    <li class="error-message" *ngIf="errorMessage">{{errorMessage}}</li>
     <app-search-result
       *ngFor="let result of searchResults"
       [result]="result"
     ></app-search-result>
-  </div>
+  </ul>
 </section>
