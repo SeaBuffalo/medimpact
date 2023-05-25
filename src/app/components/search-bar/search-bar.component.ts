@@ -109,7 +109,6 @@ export class SearchBarComponent {
             newSuggestions.push(result.products[0].brand_name);
           });
           this.suggestions = newSuggestions;
-          this.showSuggestions = true;
           this.highlightIndex = 0;
         },
       });

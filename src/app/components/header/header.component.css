@@ -17,3 +17,9 @@ button:focus {
 .header-text {
   font-weight: 300;
 }
+
+@media screen and (max-width: 455px) {
+  .header-text {
+    display: none;
+  }
+}

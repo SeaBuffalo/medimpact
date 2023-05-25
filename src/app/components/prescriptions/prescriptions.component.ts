@@ -22,7 +22,6 @@ export class PrescriptionsComponent {
   private menuSubscription!: Subscription;
   private prescriptionSubscription!: Subscription;
 
-
   showPrescriptionBar = false;
 
   constructor(
@@ -50,11 +49,10 @@ export class PrescriptionsComponent {
 
   handleUpdatePrescriptions(prescriptions: SearchResult[]): void {
     this.prescriptions = prescriptions;
-    this.shownPrescriptions = prescriptions;
+    this.filterPrescriptions(this.searchTerm);
   }
 
-  filterPrescriptions(event: Event): void {
-    const searchTerm = (event.target as HTMLInputElement).value;
+  filterPrescriptions(searchTerm: string): void {
     this.shownPrescriptions = [];
     this.prescriptions.forEach((prescription) => {
       for (const [key, value] of Object.entries(prescription)) {
@@ -67,7 +65,12 @@ export class PrescriptionsComponent {
         if (key === 'active_ingredients') {
           prescription.active_ingredients.forEach((ingredient: Ingredient) => {
             if (
-              ingredient.name.toLowerCase().includes(searchTerm.toLowerCase()) || ingredient.strength.toLowerCase().includes(searchTerm.toLowerCase())
+              ingredient.name
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()) ||
+              ingredient.strength
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase())
             ) {
               prescriptionIsShown = true;
             }

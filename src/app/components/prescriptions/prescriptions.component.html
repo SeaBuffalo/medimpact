@@ -8,7 +8,7 @@
         type="text"
         placeholder="search"
         maxlength="35"
-        (keyup)="filterPrescriptions($event)"
+        (keyup)="filterPrescriptions(searchTerm)"
       />
       <button
         *ngIf="searchTerm.length"
