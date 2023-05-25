@@ -11,6 +11,7 @@
   >
     <h1>Find Your Medication</h1>
     <app-search-bar
+      [scrollClose]="scrollClose"
       (searchResults)="updateResults($event)"
       (focus)="handleFocus()"
     ></app-search-bar>

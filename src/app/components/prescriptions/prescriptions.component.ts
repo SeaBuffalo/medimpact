@@ -84,5 +84,6 @@ export class PrescriptionsComponent {
   clearFilter(): void {
     this.searchTerm = '';
     this.shownPrescriptions = this.prescriptions;
+    document.getElementById('prescriptions-filter')?.focus();
   }
 }

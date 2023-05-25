@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CallService } from '../../services/call.service';
@@ -14,10 +14,15 @@ export class SearchBarComponent {
   public faTimes = faTimes;
   public searchTerm: string = '';
   public errorMessage: null | string = null;
-  public suggestions: string[] = ['advil', 'ibuprofen', 'tylenol'];
+  public suggestions: string[] = ['advil', 'ibuprofen', 'tylenol', 'aleve'];
   public showSuggestions: boolean = false;
   public highlightIndex: number = 0;
   private debounce: ReturnType<typeof setTimeout> | null = null;
+  @Input() set scrollClose(value: boolean) {
+    if (value) {
+      this.showSuggestions = false;
+    }
+  }
   @Output() focus = new EventEmitter<boolean>();
   @Output() searchResults = new EventEmitter<SearchResult[]>();
 
@@ -42,6 +47,7 @@ export class SearchBarComponent {
           };
           newResults.push(newResult);
         });
+        window.scrollTo(0, 0);
         this.searchResults.emit(newResults);
         this.showSuggestions = false;
         this.highlightIndex = 0;
@@ -57,7 +63,7 @@ export class SearchBarComponent {
   //clear search bar and focus for new query
   clearSearchTerm(): void {
     this.searchTerm = '';
-    this.suggestions = ['advil', 'ibuprofen', 'tylenol'];
+    this.suggestions = ['advil', 'ibuprofen', 'tylenol', 'aleve'];
     this.errorMessage = null;
     document.getElementById('search-bar-input')?.focus();
     this.showSuggestions = true;
@@ -88,7 +94,7 @@ export class SearchBarComponent {
 
     //handle clearing search term
     if (this.searchTerm.length < 1) {
-      this.suggestions = ['advil', 'ibuprofen', 'tylenol'];
+      this.suggestions = ['advil', 'ibuprofen', 'tylenol', 'aleve'];
       return;
     }
 
@@ -119,7 +125,7 @@ export class SearchBarComponent {
 
   handleSuggestionClick(suggestion: string): void {
     this.searchTerm = suggestion;
-    
+
     this.newSearch(this.searchTerm);
   }
 

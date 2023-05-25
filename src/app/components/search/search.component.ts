@@ -17,6 +17,7 @@ export class SearchComponent {
   private overlayMenuSubscription!: Subscription;
   private callServiceSubscription!: Subscription;
   private prevScrollpos: number = window.pageYOffset;
+  public scrollClose = false;
   public errorMessage: string | null = null;
   public sectionClass: string =
     window.innerWidth < 768 ? 'search-nomenu' : 'search';
@@ -184,10 +185,12 @@ export class SearchComponent {
 
   handleScroll(): void {
     const currentScrollPos = window.pageYOffset;
-    if (this.prevScrollpos > currentScrollPos) {
+    if (this.prevScrollpos > currentScrollPos || currentScrollPos < 100) {
       document.getElementById('search-container')!.style.marginTop = '0';
+      this.scrollClose = false
     } else {
       document.getElementById('search-container')!.style.marginTop = '-113px';
+      this.scrollClose = true
     }
     this.prevScrollpos = currentScrollPos;
   }
