@@ -13,6 +13,7 @@ import { PrescriptionComponent } from './components/prescription/prescription.co
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { SearchSuggestionsComponent } from './components/search-suggestions/search-suggestions.component';
+import { FilterMenuComponent } from './components/filter-menu/filter-menu.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SearchSuggestionsComponent } from './components/search-suggestions/sear
     SearchResultComponent,
     SearchBarComponent,
     SearchSuggestionsComponent,
+    FilterMenuComponent,
   ],
   imports: [
     BrowserModule,

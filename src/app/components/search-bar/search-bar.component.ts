@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CallService } from '../../services/call.service';
 import { SearchResult } from '../../types/SearchResult';
+import { FilterMenuOptions } from '../../types/FilterMenuOptions';
 
 @Component({
   selector: 'app-search-bar',
@@ -23,6 +24,13 @@ export class SearchBarComponent {
       this.showSuggestions = false;
     }
   }
+  @Input() filterMenuOpen: boolean = false;
+  @Input() filterMenuOptions: FilterMenuOptions = {
+    search_by: 'all',
+    distribution: 'all',
+    administration: 'all',
+    results: '10',
+  };
   @Output() focus = new EventEmitter<boolean>();
   @Output() searchResults = new EventEmitter<SearchResult[]>();
 
@@ -31,7 +39,7 @@ export class SearchBarComponent {
   //search and update results
   newSearch(query: string): void {
     if (query.length < 1) return;
-    this.callService.getDrugs(query).subscribe({
+    this.callService.getDrugs(query, this.filterMenuOptions).subscribe({
       next: (data) => {
         this.callService.removeError();
         let newResults: SearchResult[] = [];

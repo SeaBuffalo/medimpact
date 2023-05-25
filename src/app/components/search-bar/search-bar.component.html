@@ -28,7 +28,10 @@
   >
     <fa-icon [icon]="faSearch"></fa-icon>
   </button>
-  <ul *ngIf="showSuggestions" id="suggestion-container">
+  <ul 
+  *ngIf="showSuggestions" 
+  id="suggestion-container"
+  [ngStyle]="{ top: filterMenuOpen ? '144px' : '94px' }">
     <app-search-suggestions
       *ngFor="let suggestion of suggestions"
       [suggestion]="suggestion"

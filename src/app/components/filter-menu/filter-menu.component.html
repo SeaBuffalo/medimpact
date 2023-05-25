@@ -1,0 +1,41 @@
+<span class="filter-menu">
+  <div>
+    <label for="search_by">Search by:</label>
+    <br />
+    <select (change)="updateFilterMenuOptions($event)" name="search_by">
+      <option value="all">All</option>
+      <option value="sponsor-name">Sponsor Name</option>
+      <option value="brand-name">Brand Name</option>
+      <option value="active-ingredients">Active Ingredients</option>
+    </select>
+  </div>
+  <div>
+    <label for="distribution">Distribution:</label>
+    <br />
+    <select (change)="updateFilterMenuOptions($event)" name="distribution">
+      <option value="all">All</option>
+      <option value="discontinued">Discontinued</option>
+      <option value="counter">Over-the-counter</option>
+      <option value="prescription">Prescription</option>
+    </select>
+  </div>
+  <div>
+    <label for="administration">Administration:</label>
+    <br />
+    <select (change)="updateFilterMenuOptions($event)" name="administration">
+      <option value="all">All</option>
+      <option value="oral">Oral</option>
+      <option value="topical">Topical</option>
+      <option value="injection">Injection</option>
+    </select>
+  </div>
+  <div>
+    <label for="results">Results:</label>
+    <br />
+    <select (change)="updateFilterMenuOptions($event)" name="results">
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+  </div>
+</span>

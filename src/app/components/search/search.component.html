@@ -9,15 +9,36 @@
     class="search-container"
     id="search-container"
   >
-    <h1>Find Your Medication</h1>
+    <div class="search-header">
+      <h1>Find Your Medication</h1>
+      <button
+        (click)="toggleFilterMenu()"
+        [ngStyle]="{
+          transform: filterMenuOpen ? 'rotate(180deg)' : 'rotate(0)'
+        }"
+        aria-label="expand filter menu"
+        class="expand-filters"
+      >
+        <fa-icon class="chevron" [icon]="faChevronDown"></fa-icon>
+      </button>
+    </div>
+    <app-filter-menu
+      (filterMenuOptions)="updateFilterMenuOptions($event)"
+      [ngStyle]="{ display: filterMenuOpen ? '' : 'none' }"
+    ></app-filter-menu>
     <app-search-bar
       [scrollClose]="scrollClose"
+      [filterMenuOpen]="filterMenuOpen"
+      [filterMenuOptions]="filterMenuOptions"
       (searchResults)="updateResults($event)"
       (focus)="handleFocus()"
     ></app-search-bar>
   </div>
-  <section class="results-container">
-    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <section [ngStyle]="{paddingTop: filterMenuOpen ? '165px': '115px'}" class="results-container">
+    <div *ngIf="errorMessage">
+      <p class="error-message">{{ errorMessage }}</p>
+      <p class="error-tip">Please try modifying your search parameters</p>
+    </div>
     <app-search-result
       *ngFor="let result of searchResults"
       [result]="result"

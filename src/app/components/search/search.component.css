@@ -1,5 +1,5 @@
 .search-container {
-  height: 111px;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,19 +9,42 @@
   transition: 300ms;
 }
 
-h1 {
-  font-weight: 400;
-  font-size: 2rem;
-  line-height: 1.8rem;
+.search-header {
   width: 90%;
   max-width: 550px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-.results-container {
-  padding-top: 111px;
+h1 {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 500px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+.expand-filters {
+  height: 25px;
+  width: 25px;
+  transition: 150ms;
+}
+
+.error-message, .error-tip {
+  text-align: center;
+  padding: 10px;
 }
 
 .error-message {
-  text-align: center;
   font-size: 2rem;
+}
+
+.error-tip {
+  font-size: 1.5rem;
 }

@@ -59,7 +59,6 @@ input[type="text"] {
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 92px;
   width: 90%;
   max-width: 550px;
   border: 1px solid rgba(0, 0, 0, 0.2);

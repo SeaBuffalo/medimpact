@@ -4,6 +4,9 @@ import { OverlayMenuService } from '../../services/overlay-menu.service';
 import { CallService } from '../../services/call.service';
 import { Subscription } from 'rxjs';
 import { SearchResult } from '../../types/SearchResult';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { pageLoadData } from '../../../pageLoadData';
+import { FilterMenuOptions } from '../../types/FilterMenuOptions';
 
 @Component({
   selector: 'app-search',
@@ -22,104 +25,15 @@ export class SearchComponent {
   public sectionClass: string =
     window.innerWidth < 768 ? 'search-nomenu' : 'search';
   public headerWidthFull: boolean = window.innerWidth < 768 ? true : false;
-  @Input() searchResults: SearchResult[] = [
-    {
-        "sponsor_name": "BAYER",
-        "brand_name": "ALEVE-D SINUS & COLD",
-        "dosage_form": "TABLET, EXTENDED RELEASE",
-        "route": "ORAL",
-        "active_ingredients": [
-            {
-                "name": "NAPROXEN SODIUM",
-                "strength": "220MG"
-            },
-            {
-                "name": "PSEUDOEPHEDRINE HYDROCHLORIDE",
-                "strength": "120MG **Federal Register determination that product was not discontinued or withdrawn for safety or effectiveness reasons**"
-            }
-        ],
-        "marketing_status": "Discontinued",
-        "application_number": "NDA021076"
-    },
-    {
-        "sponsor_name": "PERRIGO",
-        "brand_name": "NAPROXEN SODIUM AND PSEUDOEPHEDRINE HYDROCHLORIDE",
-        "dosage_form": "TABLET, EXTENDED RELEASE",
-        "route": "ORAL",
-        "active_ingredients": [
-            {
-                "name": "NAPROXEN SODIUM",
-                "strength": "220MG"
-            },
-            {
-                "name": "PSEUDOEPHEDRINE HYDROCHLORIDE",
-                "strength": "120MG"
-            }
-        ],
-        "marketing_status": "Over-the-counter",
-        "application_number": "ANDA076518"
-    },
-    {
-        "sponsor_name": "BIONPHARMA INC",
-        "brand_name": "NAPROXEN SODIUM",
-        "dosage_form": "CAPSULE",
-        "route": "ORAL",
-        "active_ingredients": [
-            {
-                "name": "NAPROXEN SODIUM",
-                "strength": "EQ 200MG BASE"
-            }
-        ],
-        "marketing_status": "Over-the-counter",
-        "application_number": "NDA021920"
-    },
-    {
-        "sponsor_name": "BAYER",
-        "brand_name": "ALEVE",
-        "dosage_form": "TABLET",
-        "route": "ORAL",
-        "active_ingredients": [
-            {
-                "name": "NAPROXEN SODIUM",
-                "strength": "220MG"
-            }
-        ],
-        "marketing_status": "Over-the-counter",
-        "application_number": "NDA020204"
-    },
-    {
-        "sponsor_name": "BAYER HLTHCARE",
-        "brand_name": "ALEVE PM",
-        "dosage_form": "TABLET",
-        "route": "ORAL",
-        "active_ingredients": [
-            {
-                "name": "DIPHENHYDRAMINE HYDROCHLORIDE",
-                "strength": "25MG"
-            },
-            {
-                "name": "NAPROXEN SODIUM",
-                "strength": "220MG"
-            }
-        ],
-        "marketing_status": "Over-the-counter",
-        "application_number": "NDA205352"
-    },
-    {
-        "sponsor_name": "PERRIGO PHARMA INTL",
-        "brand_name": "DICLOFENAC SODIUM",
-        "dosage_form": "GEL",
-        "route": "TOPICAL",
-        "active_ingredients": [
-            {
-                "name": "DICLOFENAC SODIUM",
-                "strength": "1%"
-            }
-        ],
-        "marketing_status": "Over-the-counter",
-        "application_number": "ANDA211253"
-    }
-];
+  public faChevronDown = faChevronDown;
+  public filterMenuOpen: boolean = false;
+  public filterMenuOptions: FilterMenuOptions = {
+    search_by: 'all',
+    distribution: 'all',
+    administration: 'all',
+    results: '10',
+  };
+  @Input() searchResults: SearchResult[] = pageLoadData;
 
   constructor(
     private toggleMenuService: ToggleMenuService,
@@ -187,11 +101,19 @@ export class SearchComponent {
     const currentScrollPos = window.pageYOffset;
     if (this.prevScrollpos > currentScrollPos || currentScrollPos < 100) {
       document.getElementById('search-container')!.style.marginTop = '0';
-      this.scrollClose = false
+      this.scrollClose = false;
     } else {
-      document.getElementById('search-container')!.style.marginTop = '-113px';
-      this.scrollClose = true
+      document.getElementById('search-container')!.style.marginTop = '-175px';
+      this.scrollClose = true;
     }
     this.prevScrollpos = currentScrollPos;
+  }
+
+  toggleFilterMenu(): void {
+    this.filterMenuOpen = !this.filterMenuOpen;
+  }
+
+  updateFilterMenuOptions(event: FilterMenuOptions): void {
+    this.filterMenuOptions = event;
   }
 }
