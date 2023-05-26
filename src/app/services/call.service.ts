@@ -102,16 +102,10 @@ export class CallService {
         url += sanitizedQuery;
       }
       if (distribution) {
-        if (search_by) {
-          url += '+AND';
-        }
-        url += '+' + distribution;
+        url += '+AND+' + distribution;
       }
       if (administration) {
-        if (search_by || distribution) {
-          url += '+AND';
-        }
-        url += '+' + administration;
+        url += '+AND+' + administration;
       }
       url += `&limit=${results}`;
       return this.http.get<any>(url);
