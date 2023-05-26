@@ -2,7 +2,7 @@
   <div>
     <label for="search_by">Search by:</label>
     <br />
-    <select (change)="updateFilterMenuOptions($event)" name="search_by">
+    <select (change)="updateFilterMenuOptions($event)" id="search_by" name="search_by">
       <option value="all">All</option>
       <option value="sponsor-name">Sponsor Name</option>
       <option value="brand-name">Brand Name</option>
@@ -12,7 +12,7 @@
   <div>
     <label for="distribution">Distribution:</label>
     <br />
-    <select (change)="updateFilterMenuOptions($event)" name="distribution">
+    <select (change)="updateFilterMenuOptions($event)" id="distribution" name="distribution">
       <option value="all">All</option>
       <option value="discontinued">Discontinued</option>
       <option value="counter">Over-the-counter</option>
@@ -22,7 +22,7 @@
   <div>
     <label for="administration">Administration:</label>
     <br />
-    <select (change)="updateFilterMenuOptions($event)" name="administration">
+    <select (change)="updateFilterMenuOptions($event)" id="administration" name="administration">
       <option value="all">All</option>
       <option value="oral">Oral</option>
       <option value="topical">Topical</option>
@@ -32,7 +32,7 @@
   <div>
     <label for="results">Results:</label>
     <br />
-    <select (change)="updateFilterMenuOptions($event)" name="results">
+    <select (change)="updateFilterMenuOptions($event)" id="results" name="results">
       <option value="10">10</option>
       <option value="25">25</option>
       <option value="50">50</option>
