@@ -123,6 +123,7 @@ export class SearchBarComponent {
     }
   }
 
+  //debounce input to prevent too many api calls
   debounceInput(event: KeyboardEvent): void {
     clearTimeout(this.debounce as ReturnType<typeof setTimeout>);
     this.debounce = setTimeout(() => {
@@ -132,8 +133,10 @@ export class SearchBarComponent {
 
   handleSuggestionClick(suggestion: string): void {
     this.searchTerm = suggestion;
-
     this.newSearch(this.searchTerm);
+    setTimeout(() => {
+      this.showSuggestions = false;
+    }, 75)
   }
 
   highlightSuggestion(highlightIndex: number): void {
