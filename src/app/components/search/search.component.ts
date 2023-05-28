@@ -7,11 +7,13 @@ import { SearchResult } from '../../types/SearchResult';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { pageLoadData } from '../../../pageLoadData';
 import { FilterMenuOptions } from '../../types/FilterMenuOptions';
+import { fadeIn } from '../../utils/fadeInAnimation';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
+  animations: [fadeIn]
 })
 export class SearchComponent {
   private showMenu: boolean = window.innerWidth < 768 ? false : true;
@@ -33,6 +35,7 @@ export class SearchComponent {
     administration: 'all',
     results: '10',
   };
+  public loading: boolean = false;
   @Input() searchResults: SearchResult[] = pageLoadData;
 
   constructor(
@@ -115,5 +118,9 @@ export class SearchComponent {
 
   updateFilterMenuOptions(event: FilterMenuOptions): void {
     this.filterMenuOptions = event;
+  }
+
+  handleLoading(event: boolean): void {
+    this.loading = event;
   }
 }

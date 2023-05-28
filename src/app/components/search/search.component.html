@@ -32,9 +32,14 @@
       [filterMenuOptions]="filterMenuOptions"
       (searchResults)="updateResults($event)"
       (focus)="handleFocus()"
+      (loading)="handleLoading($event)"
     ></app-search-bar>
   </div>
-  <section [ngStyle]="{paddingTop: filterMenuOpen ? '165px': '115px'}" class="results-container">
+  <section
+    [ngStyle]="{ paddingTop: filterMenuOpen ? '165px' : '115px' }"
+    class="results-container"
+  >
+    <div *ngIf="loading" class="loading"></div>
     <div *ngIf="errorMessage">
       <p class="error-message">{{ errorMessage }}</p>
       <p class="error-tip">Please try modifying your search parameters</p>
@@ -42,6 +47,7 @@
     <app-search-result
       *ngFor="let result of searchResults"
       [result]="result"
+      [@fadeIn]="'150ms'"
     ></app-search-result>
   </section>
 </section>

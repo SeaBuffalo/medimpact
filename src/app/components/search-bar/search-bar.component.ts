@@ -32,6 +32,7 @@ export class SearchBarComponent {
     results: '10',
   };
   @Output() focus = new EventEmitter<boolean>();
+  @Output() loading = new EventEmitter<boolean>();
   @Output() searchResults = new EventEmitter<SearchResult[]>();
 
   constructor(private callService: CallService) {}
@@ -39,6 +40,7 @@ export class SearchBarComponent {
   //search and update results
   newSearch(query: string): void {
     if (query.length < 1) return;
+    this.loading.emit(true);
     this.callService.getDrugs(query, this.filterMenuOptions).subscribe({
       next: (data) => {
         this.callService.removeError();
@@ -65,6 +67,7 @@ export class SearchBarComponent {
         this.callService.handleError(error);
       },
     });
+    this.loading.emit(false);
     document.getElementById('search-bar-input')?.blur();
   }
 
