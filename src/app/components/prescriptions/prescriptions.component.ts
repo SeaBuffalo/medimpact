@@ -21,6 +21,7 @@ export class PrescriptionsComponent {
   public shownPrescriptions: SearchResult[] = this.prescriptions;
   private menuSubscription!: Subscription;
   private prescriptionSubscription!: Subscription;
+  private timeout!: ReturnType<typeof setTimeout>;
 
   showPrescriptionBar = false;
 
@@ -44,7 +45,18 @@ export class PrescriptionsComponent {
   }
 
   handleToggleMenu(value: boolean): void {
-    this.showMenu = value;
+    if (value) {
+      clearTimeout(this.timeout);
+      document.querySelector('.prescriptions')?.classList.remove('slide-out')
+      document.querySelector('.prescriptions')?.classList.add('slide-in')
+      this.showMenu = value;      
+    } else {
+      document.querySelector('.prescriptions')?.classList.remove('slide-in')
+      document.querySelector('.prescriptions')?.classList.add('slide-out')
+      this.timeout = setTimeout(() => {
+        this.showMenu = value;
+      } , 300)
+    }
   }
 
   handleUpdatePrescriptions(prescriptions: SearchResult[]): void {

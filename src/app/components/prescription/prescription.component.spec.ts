@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { PrescriptionComponent } from './prescription.component';
 
@@ -8,7 +9,8 @@ describe('PrescriptionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PrescriptionComponent]
+      declarations: [PrescriptionComponent],
+      imports: [FontAwesomeModule],
     });
     fixture = TestBed.createComponent(PrescriptionComponent);
     component = fixture.componentInstance;

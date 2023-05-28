@@ -49,10 +49,6 @@ button:focus {
   outline: #000000 solid 2px;
 }
 
-/* section {
-  transition: 150ms;
-} */
-
 input[type="text"] {
   height: 35px;
   font-size: 1rem;
@@ -88,6 +84,28 @@ tr:nth-child(odd) {
   position: fixed;
   height: calc(100vh - 60px);
   z-index: 40;
+}
+
+section {
+  transition: 300ms;
+}
+
+.slide-in {
+  animation: slidemenu .3s ease;
+}
+
+.slide-out {
+  margin-left: -280px;
+  animation: slidemenu .3s ease reverse;
+}
+
+@keyframes slidemenu {
+  from {
+    margin-left: -280px;
+  }
+  to {
+    margin-left: 0;
+  }
 }
 
 .search,
