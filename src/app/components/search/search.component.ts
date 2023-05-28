@@ -7,13 +7,11 @@ import { SearchResult } from '../../types/SearchResult';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { pageLoadData } from '../../../pageLoadData';
 import { FilterMenuOptions } from '../../types/FilterMenuOptions';
-import { fadeIn } from '../../utils/fadeInAnimation';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'],
-  animations: [fadeIn]
+  styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
   private showMenu: boolean = window.innerWidth < 768 ? false : true;
