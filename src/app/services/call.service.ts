@@ -45,13 +45,13 @@ export class CallService {
       if (filterMenuOptions.search_by !== 'all') {
         switch (filterMenuOptions.search_by) {
           case 'brand-name':
-            search_by = `products.brand_name:${sanitizedQuery}`;
+            search_by = `products.brand_name:(${sanitizedQuery})`;
             break;
           case 'sponsor-name':
-            search_by = `sponsor_name:${sanitizedQuery}`;
+            search_by = `sponsor_name:(${sanitizedQuery})`;
             break;
           case 'active-ingredients':
-            search_by = `products.active_ingredients.name:${sanitizedQuery}`;
+            search_by = `products.active_ingredients.name:(${sanitizedQuery})`;
             break;
           default:
             break;
@@ -92,14 +92,14 @@ export class CallService {
       }
       let url = this.apiurl;
       if (!search_by && !distribution && !administration) {
-        url += sanitizedQuery;
+        url += `(${sanitizedQuery})`;
         url += `&limit=${results}`;
         return this.http.get<any>(url);
       }
       if (search_by) {
         url += search_by;
       } else {
-        url += sanitizedQuery;
+        url += `(${sanitizedQuery})`;
       }
       if (distribution) {
         url += '+AND+' + distribution;
@@ -110,7 +110,7 @@ export class CallService {
       url += `&limit=${results}`;
       return this.http.get<any>(url);
     }
-    const url = `${this.apiurl}${sanitizedQuery}&limit=10`;
+    const url = `${this.apiurl}(${sanitizedQuery})&limit=10`;
     return this.http.get<any>(url);
   }
 }
