@@ -7,15 +7,21 @@ import { FilterMenuOptions } from '../types/FilterMenuOptions';
   providedIn: 'root',
 })
 export class CallService {
-  private apiurl: string = 'https://api.fda.gov/drug/drugsfda.json?search=';
+  private apiurl: string =
+    'https://api.fda.gov/drug/drugsfda.json?search=';
   private errorMessage: null | string = null;
   private errorSubject = new Subject<string | null>();
 
   constructor(private http: HttpClient) {}
 
-  public handleError(error: HttpErrorResponse) {
-    let newError = error.error.error.message;
-    if (typeof newError === 'string') {
+  public handleError(error: HttpErrorResponse | string) {
+    let newError: string;
+    if (typeof error === 'string') {
+      newError = error;
+    } else {
+      newError = error.error.error.message;
+    }
+    if (newError) {
       this.errorMessage = newError;
       this.errorSubject.next(this.errorMessage);
     }
@@ -51,7 +57,7 @@ export class CallService {
             search_by = `sponsor_name:(${sanitizedQuery})`;
             break;
           case 'active-ingredients':
-            search_by = `products.active_ingredients.name:(${sanitizedQuery})`;
+            search_by = `products.active_ingredients.name.exact:(${sanitizedQuery})`;
             break;
           default:
             break;

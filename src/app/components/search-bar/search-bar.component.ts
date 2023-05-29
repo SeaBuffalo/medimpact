@@ -46,6 +46,17 @@ export class SearchBarComponent {
         this.callService.removeError();
         let newResults: SearchResult[] = [];
         data.results.forEach((result: any) => {
+          if (!result.products) return;
+          if (
+            !result.sponsor_name ||
+            !result.products[0].brand_name ||
+            !result.products[0].dosage_form ||
+            !result.products[0].route ||
+            !result.products[0].active_ingredients ||
+            !result.products[0].marketing_status ||
+            !result.application_number
+          )
+            return;
           let newResult: SearchResult = {
             sponsor_name: result.sponsor_name,
             brand_name: result.products[0].brand_name,
@@ -58,6 +69,12 @@ export class SearchBarComponent {
           newResults.push(newResult);
         });
         window.scrollTo(0, 0);
+        if (newResults.length === 0) {
+          this.errorMessage = 'No results found.';
+          this.searchResults.emit([]);
+          this.callService.handleError(this.errorMessage);
+          return;
+        }
         this.searchResults.emit(newResults);
         this.showSuggestions = false;
         this.highlightIndex = 0;
@@ -139,7 +156,7 @@ export class SearchBarComponent {
     this.newSearch(this.searchTerm);
     setTimeout(() => {
       this.showSuggestions = false;
-    }, 75)
+    }, 75);
   }
 
   highlightSuggestion(highlightIndex: number): void {
