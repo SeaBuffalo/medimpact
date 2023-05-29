@@ -63,6 +63,7 @@ export class SearchBarComponent {
         this.highlightIndex = 0;
       },
       error: (error: HttpErrorResponse) => {
+        this.errorMessage = error.error.error.message;
         this.searchResults.emit([]);
         this.callService.handleError(error);
       },
@@ -113,7 +114,6 @@ export class SearchBarComponent {
     if (/[a-zA-Z]/.test(event.key) || event.key === 'Backspace') {
       this.callService.getDrugs(this.searchTerm).subscribe({
         next: (data) => {
-          this.callService.removeError();
           let newSuggestions: string[] = [];
           data.results.forEach((result: any) => {
             if (newSuggestions.includes(result.products[0].brand_name)) return;
