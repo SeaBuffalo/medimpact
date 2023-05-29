@@ -35,8 +35,16 @@ h3 {
   font-weight: 400;
   font-size: 2rem;
   line-height: 2rem;
-  word-wrap: break-word;
   max-width: calc(100% - 85px);
+}
+
+h3, td, tr, th, table, article, .result {
+  word-wrap: break-word;
+}
+
+tr {
+  width: 100%;
+  max-width: 100%;
 }
 
 .add, .remove {

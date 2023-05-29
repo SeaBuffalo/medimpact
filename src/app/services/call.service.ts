@@ -40,29 +40,39 @@ export class CallService {
     query: string,
     filterMenuOptions?: FilterMenuOptions
   ): Observable<any> {
+    //sanitize query, add special openfda syntax
     const sanitizedQuery = query
       .toUpperCase()
+      .replaceAll('%', '%25')
+      .replaceAll('+', '%2B')
       .replaceAll(' ', '+')
-      .replaceAll('/', '')
-      .replaceAll('&', '');
+      .replaceAll('&', '%26')
+      .replaceAll('#', '');
+
+    //if filter options, build special query
     if (filterMenuOptions) {
+      //number of results
       const results = filterMenuOptions.results;
+      
+      //determine field to search by
       let search_by: null | string = null;
       if (filterMenuOptions.search_by !== 'all') {
         switch (filterMenuOptions.search_by) {
           case 'brand-name':
-            search_by = `products.brand_name:(${sanitizedQuery})`;
+            search_by = `products.brand_name:("${sanitizedQuery}")`;
             break;
           case 'sponsor-name':
-            search_by = `sponsor_name:(${sanitizedQuery})`;
+            search_by = `sponsor_name:("${sanitizedQuery}")`;
             break;
           case 'active-ingredients':
-            search_by = `products.active_ingredients.name.exact:(${sanitizedQuery})`;
+            search_by = `products.active_ingredients.name.exact:("${sanitizedQuery}")`;
             break;
           default:
             break;
         }
       }
+
+      //determine distribution
       let distribution: null | string = null;
       if (filterMenuOptions.distribution !== 'all') {
         switch (filterMenuOptions.distribution) {
@@ -80,6 +90,7 @@ export class CallService {
         }
       }
 
+      //determine administration
       let administration: string | null = null;
       if (filterMenuOptions.administration !== 'all') {
         switch (filterMenuOptions.administration) {
@@ -96,27 +107,38 @@ export class CallService {
             break;
         }
       }
+
+      //build url
       let url = this.apiurl;
+
+      //if no special filter options, just search by query
       if (!search_by && !distribution && !administration) {
-        url += `(${sanitizedQuery})`;
-        url += `&limit=${results}`;
+        url = `${this.apiurl}("${sanitizedQuery}")&limit=10`;
         return this.http.get<any>(url);
       }
+
+      //if special search_by field, add to url, otherwise just search by query
       if (search_by) {
         url += search_by;
       } else {
-        url += `(${sanitizedQuery})`;
+        url += `("${sanitizedQuery}")`;
       }
+
+      //if distribution or administration, add to url
       if (distribution) {
         url += '+AND+' + distribution;
       }
       if (administration) {
         url += '+AND+' + administration;
       }
+
+      //add limit to url
       url += `&limit=${results}`;
       return this.http.get<any>(url);
     }
-    const url = `${this.apiurl}(${sanitizedQuery})&limit=10`;
+
+    //if no filter options, just search by query
+    const url = `${this.apiurl}("${sanitizedQuery}")&limit=10`;
     return this.http.get<any>(url);
   }
 }
