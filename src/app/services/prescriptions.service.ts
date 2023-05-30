@@ -14,6 +14,7 @@ export class PrescriptionsService {
   constructor() {}
 
   addPrescription(prescription: SearchResult): void {
+    //check if prescription already exists
     if (
       this.prescriptions.find(
         (item) => item.application_number === prescription.application_number
@@ -21,6 +22,8 @@ export class PrescriptionsService {
     ) {
       return;
     }
+
+    //add prescription, update localStorage
     this.prescriptions.push(prescription);
     window.localStorage.setItem(
       'prescriptions',
@@ -30,6 +33,7 @@ export class PrescriptionsService {
   }
 
   removePrescription(prescription: SearchResult): void {
+    //remove prescription, update localStorage
     this.prescriptions = this.prescriptions.filter(
       (item) => item.application_number !== prescription.application_number
     );

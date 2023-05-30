@@ -12,6 +12,7 @@ export class OverlayMenuService {
   constructor(private toggleMenuService: ToggleMenuService) {}
 
   setOverlayMenu(value: boolean): void {
+    //if input value is true and menu is showing, or vice versa, toggle menu as this means screen breakpoint has been crossed
     if (
       (value && this.toggleMenuService.showMenu) ||
       (!value && !this.toggleMenuService.showMenu)

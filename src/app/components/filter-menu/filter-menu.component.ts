@@ -18,9 +18,12 @@ export class FilterMenuComponent {
   constructor() { }
 
   updateFilterMenuOptions(event: Event): void {
+    //determin which option was changed
     const target = event.target as HTMLSelectElement;
     const name = target.name;
     const value = target.value;
+
+    //update currentOptions and emit
     let options = this.currentOptions;
     options[name as keyof FilterMenuOptions] = value;
     this.currentOptions = options;

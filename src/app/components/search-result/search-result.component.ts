@@ -28,6 +28,7 @@ export class SearchResultComponent {
   }
 
   togglePrescription(): void {
+    //if prescription is already added, remove it, otherwise add it
     if (this.isAdded) {
       this.prescriptionService.removePrescription(this.result);
       return;
@@ -36,6 +37,7 @@ export class SearchResultComponent {
   }
 
   determineIfAdded(): void {
+    //determine if prescription is already added, update state
     this.isAdded = this.prescriptionService.prescriptions.find(
       (item) => item.application_number === this.result.application_number
     )

@@ -65,7 +65,7 @@ export class CallService {
             search_by = `sponsor_name:("${sanitizedQuery}")`;
             break;
           case 'active-ingredients':
-            search_by = `products.active_ingredients.name.exact:("${sanitizedQuery}")`;
+            search_by = `products.active_ingredients.name:("${sanitizedQuery}")`;
             break;
           default:
             break;

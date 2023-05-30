@@ -12,6 +12,7 @@ export class AppComponent {
   constructor(private overlayMenuService: OverlayMenuService) {}
 
   handleResize(event: Event) {
+    //if window is resized to less than 768px and overlay is not active, set overlay to active, otherwise if window is resized to more than 768px and overlay is active, set overlay to inactive
     const target = event.target as Window;
     if (target.innerWidth < 768 && !this.overlayMenuService.overlayMenu) {
       this.overlayMenuService.setOverlayMenu(true);

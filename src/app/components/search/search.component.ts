@@ -59,12 +59,15 @@ export class SearchComponent {
   }
 
   toggleMenu(value: boolean): void {
+    //update classes on menu state change
     this.showMenu = value;
     this.sectionClass = value ? 'search' : 'search-nomenu';
     this.headerWidthFull = value ? false : true;
+    //update overlay menu state
     window.innerWidth < 768
       ? (this.overlayMenu = true)
       : (this.overlayMenu = false);
+      //update classes if menu is open and overlay menu is active
     if (this.overlayMenu && this.showMenu) {
       this.sectionClass = 'search-nomenu menu-overlay';
       this.headerWidthFull = true;
@@ -72,6 +75,7 @@ export class SearchComponent {
   }
 
   toggleOverlay(value: boolean): void {
+    //update classes on overlay menu state change, determine if menu is open
     if (value) {
       this.overlayMenu = true;
       if (this.showMenu) {
@@ -99,6 +103,7 @@ export class SearchComponent {
   }
 
   handleScroll(): void {
+    //hide search bar on scroll down
     const currentScrollPos = window.pageYOffset;
     if (this.prevScrollpos > currentScrollPos || currentScrollPos < 100) {
       document.getElementById('search-container')!.style.marginTop = '0';

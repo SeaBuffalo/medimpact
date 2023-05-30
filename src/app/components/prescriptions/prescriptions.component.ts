@@ -23,8 +23,6 @@ export class PrescriptionsComponent {
   private prescriptionSubscription!: Subscription;
   private timeout!: ReturnType<typeof setTimeout>;
 
-  showPrescriptionBar = false;
-
   constructor(
     private toggleMenuService: ToggleMenuService,
     private prescriptionsService: PrescriptionsService
@@ -45,6 +43,7 @@ export class PrescriptionsComponent {
   }
 
   handleToggleMenu(value: boolean): void {
+    //update classes to trigger animation, cancel timeout if menu is still sliding when triggered again
     if (value) {
       clearTimeout(this.timeout);
       document.querySelector('.prescriptions')?.classList.remove('slide-out')
@@ -67,6 +66,7 @@ export class PrescriptionsComponent {
   filterPrescriptions(searchTerm: string): void {
     this.shownPrescriptions = [];
     this.prescriptions.forEach((prescription) => {
+      //check if any of the prescription's properties contain the search term
       for (const [key, value] of Object.entries(prescription)) {
         let prescriptionIsShown = false;
         if (typeof value === 'string') {

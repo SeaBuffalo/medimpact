@@ -39,15 +39,21 @@ export class SearchBarComponent {
 
   //search and update results
   newSearch(query: string): void {
+    //if query is empty, return
     if (query.length < 1) return;
+
+    //que loading state
     this.loading.emit(true);
+
     this.callService.getDrugs(query, this.filterMenuOptions).subscribe({
+      //handle successful response
       next: (data) => {
         this.callService.removeError();
+        //build new results array
         let newResults: SearchResult[] = [];
         data.results.forEach((result: any) => {
-          if (!result.products) return;
           if (
+            !result.products ||
             !result.sponsor_name ||
             !result.products[0].brand_name ||
             !result.products[0].dosage_form ||
@@ -69,22 +75,30 @@ export class SearchBarComponent {
           newResults.push(newResult);
         });
         window.scrollTo(0, 0);
+
+        //if no results, throw new error and return
         if (newResults.length === 0) {
           this.errorMessage = 'No results found.';
           this.searchResults.emit([]);
           this.callService.handleError(this.errorMessage);
           return;
         }
+
+        //emit new results
         this.searchResults.emit(newResults);
         this.showSuggestions = false;
         this.highlightIndex = 0;
       },
+
+      //handle error response
       error: (error: HttpErrorResponse) => {
         this.errorMessage = error.error.error.message;
         this.searchResults.emit([]);
         this.callService.handleError(error);
       },
     });
+
+    //end loading state
     this.loading.emit(false);
     document.getElementById('search-bar-input')?.blur();
   }
@@ -152,6 +166,7 @@ export class SearchBarComponent {
   }
 
   handleSuggestionClick(suggestion: string): void {
+    //set search term and query api, then close suggestions on timeout
     this.searchTerm = suggestion;
     this.newSearch(this.searchTerm);
     setTimeout(() => {
@@ -160,6 +175,7 @@ export class SearchBarComponent {
   }
 
   highlightSuggestion(highlightIndex: number): void {
+    //find suggestions container and highlight inputed suggestion
     const container = document.getElementById(
       'suggestion-container'
     ) as HTMLUListElement;
@@ -179,6 +195,7 @@ export class SearchBarComponent {
   }
 
   highlightSuggestionUp(event: Event): void {
+    //highlight previous suggestion, or focus on input if at top
     event.preventDefault();
     if (this.highlightIndex === 0) {
       document.getElementById('search-bar-input')?.focus();
@@ -189,6 +206,7 @@ export class SearchBarComponent {
   }
 
   highlightSuggestionDown(event: Event): void {
+    //highlight next suggestion, or return if at bottom
     event.preventDefault();
     if (this.highlightIndex >= this.suggestions.length - 1) return;
     this.highlightIndex++;
@@ -196,6 +214,7 @@ export class SearchBarComponent {
   }
 
   handleBlur(): void {
+    //close suggestions on blur if not focused on suggestions or search bar
     setTimeout(() => {
       const container = document.getElementById(
         'suggestion-container'
